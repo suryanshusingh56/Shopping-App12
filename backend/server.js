@@ -19,15 +19,21 @@ const allowedOrigins = [
   ];
   
   const cors = require('cors');
-  app.options('*', cors()); // Allow preflight for all routes
+//   app.options('*', cors()); // Allow preflight for all routes
 
-//   app.use(
-//       cors({
-//           origin: 'https://shopping-app-sooty-chi.vercel.app', // Replace this with your frontend domain
-//           methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-//           credentials: true, // Enable if you're sending cookies with requests
-//       })
-//   );
+  const cors = require('cors');
+
+  // CORS Configuration
+  const corsOptions = {
+    origin: 'https://shopping-app-sooty-chi.vercel.app', // Your frontend domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'],   // Allowed headers
+    credentials: true // Allow cookies (if required)
+  };
+  
+  // Use CORS middleware
+  app.use(cors(corsOptions));
+  
   
 
 app.get('/', (req, res) => {
