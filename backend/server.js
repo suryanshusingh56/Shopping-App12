@@ -41,7 +41,7 @@ app.use('/api/users',userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use(errorHandler);
 
-const PORT=8000;
-app.listen(process.env.PORT||PORT, () => {
+const PORT=process.env.PORT || 8000;
+app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.magenta);
 });

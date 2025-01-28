@@ -1,8 +1,10 @@
 const mongoose=require('mongoose');
+const password=process.env.password;
 require('colors');
 const connectDb=async ()=>{
       try {
-        const conn=await mongoose.connect(process.env.MONGO_URI,{
+        const url=`mongodb+srv://suryanshusingh56:${password}@cluster0.coz20.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+        const conn=await mongoose.connect(url,{
             useUnifiedTopology:true,
             useNewUrlParser:true,
             
