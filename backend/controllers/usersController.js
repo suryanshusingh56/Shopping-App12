@@ -56,4 +56,26 @@ const guestUserProfile = asyncHandler(async (req, res) => {
     throw new Error("User Not Found");
   }
 })
-module.exports = { authController,guestUserProfile,registerUser };
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+      const updateUser = await user.save();
+      res.json({
+        _id: updateUser._id,
+        name: updateUser.name,
+        email: updateUser.email,
+        isAdmin: updateUser.isAdmin,
+        token: generateToken(updateUser._id),
+      });
+    } else {
+      res.status(404);
+      throw new Error("user Not Found!");
+    }
+  });
+module.exports = { authController,guestUserProfile,registerUser,updateUserProfile };

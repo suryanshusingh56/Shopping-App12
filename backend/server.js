@@ -8,6 +8,7 @@ const productRoutes=require('./routes/productsRoute.js')
 const {errorHandler} =require('./middlewares/errorMiddleware.js')
 const app = express();
 const userRoutes =require('./routes/UserRoute.js')
+const orderRoutes = require("./routes/orderRoute");
 connectDb();
 //Middleware for body parser
 app.use(express.json());
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 
 app.use('/api',productRoutes);
 app.use('/api/users',userRoutes);
+app.use("/api/orders", orderRoutes);
 app.use(errorHandler);
 
 const PORT=8000;

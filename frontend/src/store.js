@@ -4,6 +4,11 @@ import productDetailReducer from './reducers/productDetailReducer';
 import cartReducer from './reducers/cartReducer'; 
 import LoginReducer from './reducers/userReducers'
 import userRegisterDetail from './reducers/registerReducer'
+import userDetailsReducers from './reducers/userDetailsReducer'
+import userUpdateReducer from './reducers/userUpdateReducer'
+import { orderCreateReducer,orderPayReducer,orderListMyReducer,orderDetailsReducer
+} from "./reducers/orderReducer";
+
 const store = configureStore({
   reducer: {
     productList: productReducer,
@@ -11,6 +16,12 @@ const store = configureStore({
     cart:cartReducer,
     userLogin:LoginReducer,
     userRegister:userRegisterDetail,
+    userDetails:userDetailsReducers,
+    userUpdateProfile:userUpdateReducer,
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
+    orderListMy: orderListMyReducer,
   },
 });
 
