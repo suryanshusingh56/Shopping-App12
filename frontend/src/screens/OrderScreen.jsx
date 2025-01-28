@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { PayPalButton } from "react-paypal-button-v2";
+// import { PayPalButton } from "react-paypal-button-v2";
 import axios from "axios";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -164,7 +164,7 @@ const OrderScreen = () => {
             </ListGroup>
           </Card>
 
-          {!order.isPaid && (
+          {/* {!order.isPaid && (
             <ListGroup.Item>
               {loadingPay && <Loader />}
               {!sdkReady ? (
@@ -176,7 +176,7 @@ const OrderScreen = () => {
                 />
               )}
             </ListGroup.Item>
-          )}
+          )} */}
         </Col>
       </Row>
     </>

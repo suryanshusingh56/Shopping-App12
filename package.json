@@ -24,7 +24,6 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.1",
-    "nodemon": "^3.1.0",
-    "react-paypal-button-v2": "^2.6.3"
+    "nodemon": "^3.1.0"
   }
 }
