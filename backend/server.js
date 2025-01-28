@@ -19,7 +19,7 @@ const allowedOrigins = [
   ];
   
   const cors = require('cors');
-//   app.options('*', cors()); // Allow preflight for all routes
+//    app.options('*', cors())
 
   const cors = require('cors');
 
