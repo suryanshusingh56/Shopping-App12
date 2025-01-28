@@ -18,17 +18,14 @@ const allowedOrigins = [
     'https://shopping-app-sooty-chi.vercel.app', // Deployed frontend
   ];
   
+  const cors = require('cors');
+
   app.use(
-    cors({
-      origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      credentials: true,
-    })
+      cors({
+          origin: 'https://shopping-app-sooty-chi.vercel.app', // Replace this with your frontend domain
+          methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+          credentials: true, // Enable if you're sending cookies with requests
+      })
   );
   
 
