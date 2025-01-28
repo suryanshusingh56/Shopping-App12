@@ -13,7 +13,24 @@ connectDb();
 //Middleware for body parser
 app.use(express.json());
 // Enable CORS for all origins
-app.use(cors());
+const allowedOrigins = [
+    'http://localhost:3000', // Local development
+    'https://shopping-app-sooty-chi.vercel.app', // Deployed frontend
+  ];
+  
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      credentials: true,
+    })
+  );
+  
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to Node Server</h1>');
