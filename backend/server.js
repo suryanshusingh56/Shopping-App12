@@ -35,7 +35,6 @@ const allowedOrigins = [
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to Node Server</h1>');
 });
-
 app.use('/api',productRoutes);
 app.use('/api/users',userRoutes);
 app.use("/api/orders", orderRoutes);
