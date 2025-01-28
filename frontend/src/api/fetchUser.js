@@ -18,7 +18,7 @@ export const fetchUserDetail = createAsyncThunk(
         const config = {
             headers: { 'Content-Type': 'application/json' }
         };
-        const url = `http://localhost:8000/api/users/login`; 
+        const url = `https://shopping-app-backend-taupe.vercel.app//api/users/login`; 
         const res = await axios.post(url, { email, password }, config);
         // console.log(res.data)
         return res.data;
@@ -31,7 +31,7 @@ export const registerUserDetail = createAsyncThunk(
         const config = {
             headers: { 'Content-Type': 'application/json' }
         };
-        const url = `http://localhost:8000/api/users`; 
+        const url = `https://shopping-app-backend-taupe.vercel.app//api/users`; 
         const res = await axios.post(url, { name, email, password }, config);
         // console.log(res.data)
         return res.data;
