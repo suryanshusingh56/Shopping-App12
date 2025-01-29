@@ -16,6 +16,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import { useDispatch } from "react-redux";
 import { getTotals } from "./reducers/cartReducer";
+import CODConfirmationScreen from "./screens/CODConfirmationScreen"
 import React, { useEffect } from "react";
 function App() {
   const dispatch = useDispatch();
