@@ -14,18 +14,7 @@ connectDb();
 app.use(express.json());
   const cors = require('cors');
 
-  app.use(
-    cors({
-      origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      credentials: true,
-    })
-)
+app.use(cors());
   
   
 
