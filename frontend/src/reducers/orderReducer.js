@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createOrder, payOrder, listMyOrders,getOrderDetails } from "../api/order";
+import { createOrder, payOrder, listMyOrders, getOrderDetails } from "../api/order";
 
 const initialState = {
   loading: false,
@@ -26,18 +26,17 @@ export const orderCreateSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.order = action.payload;
+        state.order = action.payload; 
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload; 
       });
   },
 });
 
-
 export const orderDetailsSlice = createSlice({
-  name: 'orderDetails',
+  name: "orderDetails",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -47,7 +46,7 @@ export const orderDetailsSlice = createSlice({
       })
       .addCase(getOrderDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.order = action.payload;
+        state.order = action.payload; 
       })
       .addCase(getOrderDetails.rejected, (state, action) => {
         state.loading = false;
@@ -55,8 +54,6 @@ export const orderDetailsSlice = createSlice({
       });
   },
 });
-
-
 
 
 export const orderPaySlice = createSlice({
@@ -82,6 +79,7 @@ export const orderPaySlice = createSlice({
       });
   },
 });
+
 
 export const orderListMySlice = createSlice({
   name: "orderListMy",
@@ -112,7 +110,11 @@ export const orderListMySlice = createSlice({
 });
 
 
+export const { resetOrder } = orderCreateSlice.actions;
+export const { resetPay } = orderPaySlice.actions;
+export const { resetMyOrders } = orderListMySlice.actions;
+
 export const orderCreateReducer = orderCreateSlice.reducer;
+export const orderDetailsReducer = orderDetailsSlice.reducer;
 export const orderPayReducer = orderPaySlice.reducer;
 export const orderListMyReducer = orderListMySlice.reducer;
-export const orderDetailsReducer= orderDetailsSlice.reducer;

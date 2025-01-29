@@ -58,6 +58,7 @@ const PlaceOrderScreen = () => {
       return;
     }
   
+    // Dispatch createOrder action with order details
     dispatch(
       createOrder({
         orderItems,
@@ -71,7 +72,7 @@ const PlaceOrderScreen = () => {
     );
   };
   
-  // Redirect after successful order creation
+  
   useEffect(() => {
     if (success && order) {
       if (cart.paymentMethod === "Cash on Delivery") {
