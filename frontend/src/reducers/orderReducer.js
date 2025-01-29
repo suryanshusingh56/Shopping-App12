@@ -45,10 +45,12 @@ export const orderDetailsSlice = createSlice({
         state.loading = true;
       })
       .addCase(getOrderDetails.fulfilled, (state, action) => {
+        console.log("Order Created:", action.payload); 
         state.loading = false;
         state.order = action.payload; 
       })
       .addCase(getOrderDetails.rejected, (state, action) => {
+        console.error("Order Creation Failed:", action.payload);
         state.loading = false;
         state.error = action.payload;
       });
