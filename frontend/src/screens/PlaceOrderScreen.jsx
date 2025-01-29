@@ -36,7 +36,7 @@ const PlaceOrderScreen = () => {
       console.log("Cart is empty!");
       return;
     }
-
+  
     const orderItems = cart.cartItems
       .map((item) => {
         if (!item.price || !item.cartQuantity) {
@@ -52,17 +52,17 @@ const PlaceOrderScreen = () => {
         };
       })
       .filter((item) => item !== null);
-
+  
     if (orderItems.length === 0) {
       console.log("No valid items to place in order.");
       return;
     }
-
+  
     dispatch(
       createOrder({
         orderItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod, // Ensure correct payment method
+        paymentMethod: cart.paymentMethod,
         itemsPrice: itemsPrice.toFixed(2),
         shippingPrice: shippingPrice.toFixed(2),
         taxPrice,
@@ -70,12 +70,18 @@ const PlaceOrderScreen = () => {
       })
     );
   };
-
+  
+  // Redirect after successful order creation
   useEffect(() => {
     if (success) {
-      navigate(`/order/${order._id}`);
+      if (cart.paymentMethod === "Cash on Delivery") {
+        navigate(`/order/cod/${order._id}`); // Redirect to COD confirmation page
+      } else {
+        navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
+      }
     }
-  }, [navigate, success, order]);
+  }, [navigate, success, order, cart.paymentMethod]);
+  
 
   return (
     <>

@@ -31,6 +31,7 @@ function App() {
           {/* <h1>Shopping App</h1> */}
           <Routes>
             <Route path="/" element={<HomeScreen />} />
+            <Route path="/order/cod/:id" element={<CODConfirmationScreen />} />
             <Route path="/order/:id" element={<OrderScreen/>} />
             <Route path="/login" element={<LoginScreen/>} />
             <Route path="/payment" element={<PaymentScreen/>} />
