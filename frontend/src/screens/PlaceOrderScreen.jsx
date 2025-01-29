@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../api/order";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import Message from "../components/shared/Message";
-import CheckOutStep from "../components/CheckOutStep";
+import CheckOutStep from "../components/shared/CheckoutStep";
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
@@ -66,18 +66,18 @@ const PlaceOrderScreen = () => {
       })
 
     );
-    if (cart.paymentMethod === "Paypal or Credit Card") {
-      navigate(`/order/${order._id}`);
-    } else {
-      navigate(`/order/cod/${order._id}`);
-    }
+    
   };
 
-  // useEffect(() => {
-  //   if (success && order) {
-      
-  //   }
-  // }, [navigate, success, order, cart.paymentMethod]);
+  useEffect(() => {
+    if (success && order) {
+      if (cart.paymentMethod === "Paypal or Credit Card") {
+        navigate(`/order/${order._id}`);
+      } else {
+        navigate(`/order/cod/${order._id}`);
+      }
+    }
+  }, [navigate, success, order, cart.paymentMethod]);
 
   return (
     <>
