@@ -21,7 +21,7 @@ const allowedOrigins = [
   const cors = require('cors');
 //    app.options('*', cors())
 
-  const cors = require('cors');
+//   const cors = require('cors');
 
   // CORS Configuration
   const corsOptions = {
