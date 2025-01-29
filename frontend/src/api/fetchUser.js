@@ -57,7 +57,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     };
 
     // Log the response to check if the data is being received
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get(`https://shopping-app-backend-weld-nu.vercel.app/api/users/${id}`, config);
     console.log('User Details Response:', data);  // <-- Log here
     
     dispatch(userDetailsSuccess(data));  // Dispatch the success action
@@ -90,7 +90,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put('/api/users/profile', user, config);
+    const { data } = await axios.put('https://shopping-app-backend-weld-nu.vercel.app/api/users/profile', user, config);
 
     dispatch(updateUserProfileSuccess(data));
   } catch (error) {
