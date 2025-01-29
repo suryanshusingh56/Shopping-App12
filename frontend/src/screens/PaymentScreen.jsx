@@ -45,11 +45,11 @@ const PaymentScreen = () => {
             ></Form.Check>
             <Form.Check
               type="radio"
-              label="razorPay or Credit Card"
-              id="razorPay"
+              label="Cash On Delivery"
+              id="cod"
               name="paymentMethod"
-              value="razorPay"
-              checked={paymentMethod === "paypal"} // Ensure it's checked
+              value="cod"
+              checked={paymentMethod === "cod"} // Corrected this line
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>

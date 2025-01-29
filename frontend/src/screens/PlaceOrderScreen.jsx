@@ -14,40 +14,55 @@ const PlaceOrderScreen = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
+  useEffect(() => {
+    console.log("Payment Method in Redux:", cart.paymentMethod);
+  }, [cart.paymentMethod]);
+
   // Function to calculate decimal values
   const addDecimal = (num) => (Math.round(num * 100) / 100).toFixed(2);
 
-  // Calculate prices and store them in variables
-  const itemsPrice = cart.cartItems
-    ?.reduce((acc, item) => acc + (item.price || 0) * (item.cartQuantity || 0), 0);
+  // Calculate prices
+  const itemsPrice = cart.cartItems?.reduce(
+    (acc, item) => acc + (item.price || 0) * (item.cartQuantity || 0),
+    0
+  ) || 0;
 
-  const shippingPrice = itemsPrice < 500 ? 0 : 50; // Ensure correct shipping price logic
+  const shippingPrice = itemsPrice < 500 ? 0 : 50;
   const taxPrice = addDecimal(0.15 * itemsPrice);
   const totalPrice = (itemsPrice + shippingPrice + Number(taxPrice)).toFixed(2);
 
   const placeOrderHandler = () => {
-    // Log cartItems to debug
-    console.log("Cart Items:", cart.cartItems);
-  
-    // Map cart items to the required orderItems structure
-    const orderItems = cart.cartItems.map(item => {
-      console.log("Mapping item:", item); // Debugging mapping process
-      return {
-        name: item.name,
-        qty: item.cartQuantity, // Use cartQuantity as qty
-        image: item.image,
-        price: item.price,
-        product: item._id,  // Use the correct product ID (_id)
-      };
-    });
-  
-    console.log("Order Items:", orderItems); // Check the structure of the orderItems array
-  
+    if (cart.cartItems.length === 0) {
+      console.log("Cart is empty!");
+      return;
+    }
+
+    const orderItems = cart.cartItems
+      .map((item) => {
+        if (!item.price || !item.cartQuantity) {
+          console.error("Missing price or quantity for item:", item);
+          return null;
+        }
+        return {
+          name: item.name,
+          qty: item.cartQuantity,
+          image: item.image,
+          price: item.price,
+          product: item._id,
+        };
+      })
+      .filter((item) => item !== null);
+
+    if (orderItems.length === 0) {
+      console.log("No valid items to place in order.");
+      return;
+    }
+
     dispatch(
       createOrder({
-        orderItems,  // Now contains the correct structure
+        orderItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
+        paymentMethod: cart.paymentMethod, // Ensure correct payment method
         itemsPrice: itemsPrice.toFixed(2),
         shippingPrice: shippingPrice.toFixed(2),
         taxPrice,
@@ -55,7 +70,6 @@ const PlaceOrderScreen = () => {
       })
     );
   };
-  
 
   useEffect(() => {
     if (success) {
@@ -73,14 +87,15 @@ const PlaceOrderScreen = () => {
               <h2>Shipping</h2>
               <p>
                 <strong>Address: </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}, {cart.shippingAddress.postalcode}, {cart.shippingAddress.country}
+                {cart.shippingAddress.address}, {cart.shippingAddress.city},{" "}
+                {cart.shippingAddress.postalcode}, {cart.shippingAddress.country}
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
-                <strong>{cart.paymentMethod}</strong>
+                <strong>{cart.paymentMethod || "Not Selected"}</strong> {/* Fix here */}
               </p>
             </ListGroup.Item>
 
