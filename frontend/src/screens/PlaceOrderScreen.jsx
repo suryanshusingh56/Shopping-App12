@@ -11,7 +11,9 @@ const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
   const orderCreate = useSelector((state) => state.orderCreate);
+  console.log(orderCreate)
   const { order, success, error } = orderCreate;
 
   const addDecimal = (num) => (Math.round(num * 100) / 100).toFixed(2);
@@ -67,7 +69,7 @@ const PlaceOrderScreen = () => {
 
   useEffect(() => {
     if (success && order) {
-      if (cart.paymentMethod === "Cash on Delivery") {
+      if (cart.paymentMethod === "Paypal or Credit Card") {
         navigate(`/order/cod/${order._id}`);
       } else {
         navigate(`/order/${order._id}`);
