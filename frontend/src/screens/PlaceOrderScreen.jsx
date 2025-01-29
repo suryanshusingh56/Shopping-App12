@@ -1,11 +1,3 @@
-import React, { useEffect } from "react";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/shared/Message";
-import CheckOutStep from "../components/shared/CheckoutStep";
-import { createOrder } from "../api/order"; // Import createOrder action
-
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,6 +50,7 @@ const PlaceOrderScreen = () => {
       return;
     }
 
+    // Dispatch createOrder action
     dispatch(
       createOrder({
         orderItems,
@@ -73,6 +66,8 @@ const PlaceOrderScreen = () => {
 
   // Redirect after successful order creation
   useEffect(() => {
+    console.log("orderCreate state:", orderCreate); // Check the updated state here
+
     if (success && order) {
       if (cart.paymentMethod === "Cash on Delivery") {
         navigate(`/order/cod/${order._id}`); // Redirect to COD confirmation page
@@ -80,7 +75,7 @@ const PlaceOrderScreen = () => {
         navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
       }
     }
-  }, [navigate, success, order, cart.paymentMethod]); // Make sure `orderCreate` state is being used here
+  }, [navigate, success, order, cart.paymentMethod, orderCreate]); // Track state changes
 
   return (
     <>
