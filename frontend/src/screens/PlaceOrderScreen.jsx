@@ -62,7 +62,7 @@ const PlaceOrderScreen = () => {
       createOrder({
         orderItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
+        paymentMethod: cart.paymentMethod, // Ensure correct payment method
         itemsPrice: itemsPrice.toFixed(2),
         shippingPrice: shippingPrice.toFixed(2),
         taxPrice,
@@ -71,16 +71,11 @@ const PlaceOrderScreen = () => {
     );
   };
 
-  // Redirect after successful order creation
   useEffect(() => {
-    if (success && order) {
-      if (cart.paymentMethod === "Cash on Delivery") {
-        navigate(`/order/cod/${order._id}`); // Redirect to COD confirmation page
-      } else {
-        navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
-      }
+    if (success) {
+      navigate(`/order/${order._id}`);
     }
-  }, [navigate, success, order, cart.paymentMethod]); // Make sure `orderCreate` state is being used here
+  }, [navigate, success, order]);
 
   return (
     <>
@@ -100,7 +95,7 @@ const PlaceOrderScreen = () => {
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
-                <strong>{cart.paymentMethod || "Not Selected"}</strong>
+                <strong>{cart.paymentMethod || "Not Selected"}</strong> {/* Fix here */}
               </p>
             </ListGroup.Item>
 
@@ -117,7 +112,9 @@ const PlaceOrderScreen = () => {
                           <Image src={item.image} alt={item.name} fluid />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>{item.name}</Link>
+                          <Link to={`/product/${item.product}`}>
+                            {item.name}
+                          </Link>
                         </Col>
                         <Col md={3}>
                           {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = $
