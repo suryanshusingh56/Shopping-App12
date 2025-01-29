@@ -16,7 +16,7 @@ export const createOrder = createAsyncThunk(
           Authorization: `Bearer ${userDetail.token}`,
         },
       };
-      const { data } = await axios.post("/api/orders", order, config);
+      const { data } = await axios.post("https://shopping-app-backend-weld-nu.vercel.app/api/orders", order, config);
       return data;
     } catch (error) {
       return rejectWithValue(
@@ -39,7 +39,7 @@ export const getOrderDetails = createAsyncThunk(
           Authorization: `Bearer ${userDetail.token}`,
         },
       };
-      const { data } = await axios.get(`/api/orders/${id}`, config);
+      const { data } = await axios.get(`https://shopping-app-backend-weld-nu.vercel.app/api/orders/${id}`, config);
       return data;
     } catch (error) {
       return rejectWithValue(
@@ -63,7 +63,7 @@ export const payOrder = createAsyncThunk(
         },
       };
       const { data } = await axios.put(
-        `/api/orders/${orderId}/pay`,
+        `https://shopping-app-backend-weld-nu.vercel.app/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -88,7 +88,7 @@ export const listMyOrders = createAsyncThunk(
           Authorization: `Bearer ${userDetail.token}`,
         },
       };
-      const { data } = await axios.get("/api/orders/myorders", config);
+      const { data } = await axios.get("https://shopping-app-backend-weld-nu.vercel.app/api/orders/myorders", config);
       return data;
     } catch (error) {
       return rejectWithValue(
