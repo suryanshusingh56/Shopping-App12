@@ -70,9 +70,9 @@ const PlaceOrderScreen = () => {
   useEffect(() => {
     if (success && order) {
       if (cart.paymentMethod === "Paypal or Credit Card") {
-        navigate(`/order/cod/${order._id}`);
-      } else {
         navigate(`/order/${order._id}`);
+      } else {
+        navigate(`/order/cod/${order._id}`);
       }
     }
   }, [navigate, success, order, cart.paymentMethod]);
