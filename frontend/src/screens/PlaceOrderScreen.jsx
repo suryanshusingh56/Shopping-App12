@@ -64,18 +64,16 @@ const PlaceOrderScreen = () => {
     );
   };
 
-  // Redirect after successful order creation
   useEffect(() => {
-    console.log("orderCreate state:", orderCreate); // Check the updated state here
-
     if (success && order) {
       if (cart.paymentMethod === "Cash on Delivery") {
-        navigate(`/order/cod/${order._id}`); // Redirect to COD confirmation page
+        navigate(`/order/cod/${order._id}`);
       } else {
-        navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
+        navigate(`/order/${order._id}`);
       }
     }
-  }, [navigate, success, order, cart.paymentMethod, orderCreate]); // Track state changes
+}, [navigate, success, order, cart.paymentMethod]);
+
 
   return (
     <>
