@@ -12,18 +12,8 @@ const orderRoutes = require("./routes/orderRoute");
 connectDb();
 //Middleware for body parser
 app.use(express.json());
-// Enable CORS for all origins
-const allowedOrigins = [
-    'http://localhost:3000', // Local development
-    'https://shopping-app-sooty-chi.vercel.app', // Deployed frontend
-  ];
-  
   const cors = require('cors');
-//    app.options('*', cors())
 
-//   const cors = require('cors');
-
-  // CORS Configuration
   const corsOptions = {
     origin: 'https://shopping-app-sooty-chi.vercel.app', // Your frontend domain
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
