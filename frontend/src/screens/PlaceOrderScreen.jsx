@@ -36,7 +36,7 @@ const PlaceOrderScreen = () => {
       console.log("Cart is empty!");
       return;
     }
-  
+
     const orderItems = cart.cartItems
       .map((item) => {
         if (!item.price || !item.cartQuantity) {
@@ -52,13 +52,12 @@ const PlaceOrderScreen = () => {
         };
       })
       .filter((item) => item !== null);
-  
+
     if (orderItems.length === 0) {
       console.log("No valid items to place in order.");
       return;
     }
-  
-    // Dispatch createOrder action with order details
+
     dispatch(
       createOrder({
         orderItems,
@@ -71,8 +70,8 @@ const PlaceOrderScreen = () => {
       })
     );
   };
-  
-  
+
+  // Redirect after successful order creation
   useEffect(() => {
     if (success && order) {
       if (cart.paymentMethod === "Cash on Delivery") {
@@ -81,9 +80,7 @@ const PlaceOrderScreen = () => {
         navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
       }
     }
-  }, [navigate, success, order, cart.paymentMethod]);
-  
-  
+  }, [navigate, success, order, cart.paymentMethod]); // Make sure `orderCreate` state is being used here
 
   return (
     <>
@@ -103,7 +100,7 @@ const PlaceOrderScreen = () => {
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
-                <strong>{cart.paymentMethod || "Not Selected"}</strong> {/* Fix here */}
+                <strong>{cart.paymentMethod || "Not Selected"}</strong>
               </p>
             </ListGroup.Item>
 
@@ -120,9 +117,7 @@ const PlaceOrderScreen = () => {
                           <Image src={item.image} alt={item.name} fluid />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
+                          <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </Col>
                         <Col md={3}>
                           {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = $
