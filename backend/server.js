@@ -14,15 +14,18 @@ connectDb();
 app.use(express.json());
   const cors = require('cors');
 
-  const corsOptions = {
-    origin: 'https://shopping-app-sooty-chi.vercel.app', // Your frontend domain
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'],   // Allowed headers
-    credentials: true // Allow cookies (if required)
-  };
-  
-  // Use CORS middleware
-  app.use(cors(corsOptions));
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      credentials: true,
+    })
+)
   
   
 
