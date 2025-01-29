@@ -12,11 +12,7 @@ const orderRoutes = require("./routes/orderRoute");
 connectDb();
 //Middleware for body parser
 app.use(express.json());
-  const cors = require('cors');
-
 app.use(cors());
-app.use('*',cors());
-  
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to Node Server</h1>');
