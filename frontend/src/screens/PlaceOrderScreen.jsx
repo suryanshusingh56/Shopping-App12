@@ -14,10 +14,6 @@ const PlaceOrderScreen = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
-  useEffect(() => {
-    console.log("Payment Method in Redux:", cart.paymentMethod);
-  }, [cart.paymentMethod]);
-
   const addDecimal = (num) => (Math.round(num * 100) / 100).toFixed(2);
 
   const itemsPrice = cart.cartItems?.reduce(
