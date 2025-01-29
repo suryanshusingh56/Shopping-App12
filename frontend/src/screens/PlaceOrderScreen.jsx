@@ -74,7 +74,7 @@ const PlaceOrderScreen = () => {
   // Redirect after successful order creation
   useEffect(() => {
     if (success && order) {
-      if (cart.paymentMethod === "Cash on Delivery") {
+      if (cart.paymentMethod == "Cash on Delivery") {
         navigate(`/order/cod/${order._id}`); // Redirect to COD confirmation page
       } else {
         navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
