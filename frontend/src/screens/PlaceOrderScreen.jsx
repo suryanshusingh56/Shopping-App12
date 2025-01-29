@@ -1,23 +1,27 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../api/order";
-import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import Message from "../components/shared/Message";
 import CheckOutStep from "../components/shared/CheckoutStep";
+import { createOrder } from "../api/order"; // Import createOrder action
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();//xyz
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   const orderCreate = useSelector((state) => state.orderCreate);
-  console.log(orderCreate)
   const { order, success, error } = orderCreate;
 
+  useEffect(() => {
+    console.log("Payment Method in Redux:", cart.paymentMethod);
+  }, [cart.paymentMethod]);
+
+  // Function to calculate decimal values
   const addDecimal = (num) => (Math.round(num * 100) / 100).toFixed(2);
 
+  // Calculate prices
   const itemsPrice = cart.cartItems?.reduce(
     (acc, item) => acc + (item.price || 0) * (item.cartQuantity || 0),
     0
@@ -64,20 +68,19 @@ const PlaceOrderScreen = () => {
         taxPrice,
         totalPrice,
       })
-
     );
-    
   };
 
+  // Redirect after successful order creation
   useEffect(() => {
     if (success && order) {
-      if (cart.paymentMethod === "Paypal or Credit Card") {
-        navigate(`/order/${order._id}`);
+      if (cart.paymentMethod === "Cash on Delivery") {
+        navigate(`/order/cod/${order._id}`); // Redirect to COD confirmation page
       } else {
-        navigate(`/order/cod/${order._id}`);
+        navigate(`/order/${order._id}`); // Redirect to payment page for PayPal
       }
     }
-  }, [navigate, success, order, cart.paymentMethod]);
+  }, [navigate, success, order, cart.paymentMethod]); // Make sure `orderCreate` state is being used here
 
   return (
     <>
@@ -117,7 +120,7 @@ const PlaceOrderScreen = () => {
                           <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </Col>
                         <Col md={3}>
-                          {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = ${" "}
+                          {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = $
                           {(item.cartQuantity * item.price || 0).toFixed(2)}
                         </Col>
                       </Row>
