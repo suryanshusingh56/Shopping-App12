@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
-import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/shared/Message";
 import Loader from "../components/shared/Loader";
-import { getOrderDetails, payOrder } from "../api/order"; 
+import { getOrderDetails, payOrder } from "../api/order";
 import { PayPalButton } from "react-paypal-button-v2"; // Uncomment if you want to use PayPal button
 
 const OrderScreen = () => {
@@ -19,22 +18,17 @@ const OrderScreen = () => {
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  // Calculate prices only if order is defined and orderItems exists
   if (order && order.orderItems && order.orderItems.length > 0) {
     const addDecimals = (num) => (Math.round(num * 100) / 100).toFixed(2);
-
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
 
-  // Success payment handler
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult)); 
   };
 
-  // Load PayPal script and fetch order details
   useEffect(() => {
     const addPaypalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
@@ -49,7 +43,7 @@ const OrderScreen = () => {
     };
 
     if (!order || successPay) {
-      dispatch(getOrderDetails(orderId)); // Fetch order details again if order is not available
+      dispatch(getOrderDetails(orderId)); 
     } else if (!order.isPaid) {
       if (!window.paypal) {
         addPaypalScript();
@@ -59,9 +53,29 @@ const OrderScreen = () => {
     }
   }, [dispatch, orderId, order, successPay]);
 
-  // Ensure that order.shippingAddress exists before accessing address
   const shippingAddress = order?.shippingAddress || {};
   const userName = order?.user?.name || 'User';
+
+  if (order.paymentMethod === "Cash on Delivery") {
+    return (
+      <Row>
+        <Col md={8}>
+          <Card>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h2>Order Placed Successfully</h2>
+                <p>Your order <strong>#{orderId}</strong> has been placed successfully.</p>
+                <p>Payment will be collected on delivery.</p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Link to="/">Go to Home</Link>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+        </Col>
+      </Row>
+    );
+  }
 
   return loading ? (
     <Loader />
@@ -159,22 +173,19 @@ const OrderScreen = () => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                {error && <Message variant="danger">{error}</Message>}
+                {!order.isPaid && (
+                  <>
+                    {sdkReady ? (
+                      <PayPalButton
+                        amount={order.totalPrice}
+                        onSuccess={successPaymentHandler}
+                      />
+                    ) : (
+                      <Loader />
+                    )}
+                  </>
+                )}
               </ListGroup.Item>
-
-              {!order.isPaid && (
-                <ListGroup.Item>
-                  {loadingPay && <Loader />}
-                  {!sdkReady ? (
-                    <Loader />
-                  ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
-                  )}
-                </ListGroup.Item>
-              )}
             </ListGroup>
           </Card>
         </Col>

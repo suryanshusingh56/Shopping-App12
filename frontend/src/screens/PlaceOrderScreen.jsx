@@ -1,3 +1,11 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../api/order";
+import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
+import Message from "../components/shared/Message";
+import CheckOutStep from "../components/CheckOutStep";
+
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -10,10 +18,8 @@ const PlaceOrderScreen = () => {
     console.log("Payment Method in Redux:", cart.paymentMethod);
   }, [cart.paymentMethod]);
 
-  // Function to calculate decimal values
   const addDecimal = (num) => (Math.round(num * 100) / 100).toFixed(2);
 
-  // Calculate prices
   const itemsPrice = cart.cartItems?.reduce(
     (acc, item) => acc + (item.price || 0) * (item.cartQuantity || 0),
     0
@@ -50,7 +56,6 @@ const PlaceOrderScreen = () => {
       return;
     }
 
-    // Dispatch createOrder action
     dispatch(
       createOrder({
         orderItems,
@@ -72,8 +77,7 @@ const PlaceOrderScreen = () => {
         navigate(`/order/${order._id}`);
       }
     }
-}, [navigate, success, order, cart.paymentMethod]);
-
+  }, [navigate, success, order, cart.paymentMethod]);
 
   return (
     <>
@@ -113,7 +117,7 @@ const PlaceOrderScreen = () => {
                           <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </Col>
                         <Col md={3}>
-                          {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = $
+                          {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = ${" "}
                           {(item.cartQuantity * item.price || 0).toFixed(2)}
                         </Col>
                       </Row>
