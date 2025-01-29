@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import { savePaymentMethod } from "../reducers/cartReducer";
 import CheckoutStep from "../components/shared/CheckoutStep";
 
@@ -9,21 +9,21 @@ const PaymentScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [paymentMethod, setPaymentMethod] = useState("paypal");
+  const [paymentMethod, setPaymentMethod] = useState("Paypal or Credit Card");
 
   useEffect(() => {
     if (!shippingAddress?.address) {
-      navigate("/shipping"); // Redirect to shipping if no shipping address
+      navigate("/shipping"); 
     }
   }, [shippingAddress, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeorder"); // Navigate to place order
+    navigate("/placeorder"); 
   };
 
   return (
@@ -39,8 +39,8 @@ const PaymentScreen = () => {
               label="Paypal or Credit Card"
               id="paypal"
               name="paymentMethod"
-              value="paypal"
-              checked={paymentMethod === "paypal"} // Ensure it's checked
+              value="Paypal or Credit Card"
+              checked={paymentMethod === "Paypal or Credit Card"}
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
             <Form.Check
@@ -48,8 +48,8 @@ const PaymentScreen = () => {
               label="Cash On Delivery"
               id="cod"
               name="paymentMethod"
-              value="cod"
-              checked={paymentMethod === "cod"} // Corrected this line
+              value="Cash On Delivery"
+              checked={paymentMethod === "Cash On Delivery"} 
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>
