@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/shared/Message";
 import Loader from "../components/shared/Loader";
 import { getOrderDetails, payOrder } from "../api/order";
-import { PayPalButton } from "react-paypal-button-v2"; // Uncomment if you want to use PayPal button
+// import { PayPalButton } from "react-paypal-button-v2";
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
