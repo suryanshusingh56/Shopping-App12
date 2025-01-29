@@ -8,7 +8,7 @@ import CheckOutStep from "../components/shared/CheckoutStep";
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();//xyz
 
   const cart = useSelector((state) => state.cart);
   console.log(cart);
