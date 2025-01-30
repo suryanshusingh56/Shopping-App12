@@ -18,17 +18,6 @@ function HomeScreen() {
 
   return (
     <>
-      {/* 🔹 Top Navigation Bar */}
-      <nav className="navbar navbar-expand-lg">
-        <div className="container">
-          <a className="navbar-brand" href="/">ShopOnline</a>
-          <div className="ml-auto">
-            <a className="nav-link" href="/cart">🛒 Cart</a>
-            <a className="nav-link" href="/login">👤 User</a>
-          </div>
-        </div>
-      </nav>
-
       {/* 🔹 Welcome Section */}
       <div className="home-top-section">
         <h1>Welcome to Our Store</h1>
@@ -49,7 +38,7 @@ function HomeScreen() {
         </Carousel>
       )}
 
-      {/* 🔹 Product Grid */}
+      {/* 🔹 Product Grid (Fixed Duplicate Images) */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -59,8 +48,12 @@ function HomeScreen() {
           {products.map((product) => (
             <Col key={product._id} md={3} className="mb-4">
               <Card className="product-container">
+                {/* ✅ Display Only One Image in Grid */}
                 <Image src={product.image} alt={product.name} className="product-image" />
-                <ProductScreen product={product} />
+                <div className="product-info">
+                  <h5>{product.name}</h5>
+                  <ProductScreen product={product} /> {/* ✅ Keep the logic intact */}
+                </div>
               </Card>
             </Col>
           ))}
