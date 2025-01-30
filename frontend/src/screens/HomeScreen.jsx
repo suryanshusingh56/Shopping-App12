@@ -18,13 +18,24 @@ function HomeScreen() {
 
   return (
     <>
-      {/* 🔹 Top Section with Vibrant Colors */}
+      {/* 🔹 Top Navigation Bar */}
+      <nav className="navbar navbar-expand-lg">
+        <div className="container">
+          <a className="navbar-brand" href="/">ShopOnline</a>
+          <div className="ml-auto">
+            <a className="nav-link" href="/cart">🛒 Cart</a>
+            <a className="nav-link" href="/login">👤 User</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* 🔹 Welcome Section */}
       <div className="home-top-section">
         <h1>Welcome to Our Store</h1>
         <p>Find the best products at unbeatable prices!</p>
       </div>
 
-      {/* 🔹 Carousel with Uniform Images */}
+      {/* 🔹 Carousel (Full Width as Welcome Section) */}
       {products.length > 0 && (
         <Carousel className="home-carousel mb-4">
           {products.map((product) => (
@@ -38,13 +49,13 @@ function HomeScreen() {
         </Carousel>
       )}
 
-      {/* 🔹 Product Grid with Uniform Images */}
+      {/* 🔹 Product Grid */}
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Row>
+        <Row className="product-grid">
           {products.map((product) => (
             <Col key={product._id} md={3} className="mb-4">
               <Card className="product-container">
