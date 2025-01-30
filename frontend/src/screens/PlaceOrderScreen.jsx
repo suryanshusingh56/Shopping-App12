@@ -118,7 +118,7 @@ console.log(cart.paymentMethod)
                           <Image src={item.image} alt={item.name} fluid />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>{item.name}</Link>
+                          <Link to={`/product/${item._id}`}>{item.name}</Link>
                         </Col>
                         <Col md={3}>
                           {item.cartQuantity} X ${item.price?.toFixed(2) || 0} = $
