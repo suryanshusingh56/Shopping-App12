@@ -12,7 +12,7 @@ const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false);
   const dispatch = useDispatch();
 
-  const { userDetail } = useSelector((state) => state.userLogin); // ✅ Fetch user details from Redux
+  const { userDetail } = useSelector((state) => state.userLogin); // Fetch user details from Redux
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
@@ -21,7 +21,7 @@ const OrderScreen = () => {
 
   useEffect(() => {
     if (!order || successPay || order._id !== orderId) {
-      dispatch(getOrderDetails(orderId));
+      dispatch(getOrderDetails(orderId)); // Fetch order details again if order is not available
     }
   }, [dispatch, orderId, order, successPay]);
 
@@ -46,10 +46,23 @@ const OrderScreen = () => {
     dispatch(payOrder({ orderId, paymentResult }));
   };
 
-  // ✅ Fallback in case order is still undefined
+  // Fallback in case order is still undefined
   const shippingAddress = order?.shippingAddress || {};
-  const userName = userDetail?.name || "N/A"; // ✅ Fetch from `userLogin`
-  const userEmail = userDetail?.email || "N/A"; // ✅ Fetch from `userLogin`
+  const userName = userDetail?.name || "N/A"; // Fetch from `userLogin`
+  const userEmail = userDetail?.email || "N/A"; // Fetch from `userLogin`
+
+  // Calculate prices only if order exists and orderItems is not empty
+  let itemsPrice = 0;
+  let shippingPrice = 0;
+  let taxPrice = 0;
+  let totalPrice = 0;
+
+  if (order?.orderItems && order?.orderItems.length > 0) {
+    itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0); // Correct calculation
+    shippingPrice = order.shippingPrice || 0; // Make sure shippingPrice exists
+    taxPrice = order.taxPrice || 0; // Make sure taxPrice exists
+    totalPrice = itemsPrice + shippingPrice + taxPrice;
+  }
 
   return loading ? (
     <Loader />
@@ -99,7 +112,7 @@ const OrderScreen = () => {
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant="flush">
-                  {order?.orderItems?.map((item, index) => (
+                  {order.orderItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
@@ -129,19 +142,19 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order?.itemsPrice || "0.00"}</Col>
+                  <Col>${itemsPrice.toFixed(2)}</Col> {/* Items price */}
                 </Row>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order?.shippingPrice || "0.00"}</Col>
+                  <Col>${shippingPrice.toFixed(2)}</Col> {/* Shipping price */}
                 </Row>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order?.taxPrice || "0.00"}</Col>
+                  <Col>${taxPrice.toFixed(2)}</Col> {/* Tax price */}
                 </Row>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order?.totalPrice || "0.00"}</Col>
+                  <Col>${totalPrice.toFixed(2)}</Col> {/* Total price */}
                 </Row>
               </ListGroup.Item>
             </ListGroup>
