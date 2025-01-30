@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart, removeFromCart, decreaseCartQuantity, clearCart, getTotals } from '../reducers/cartReducer';
 import { Carousel, Row, Col, Image, Button, ListGroup, Card } from "react-bootstrap";
-import "../styles/Cart.css";  // ✅ Importing CSS
+import "../styles/cart.css";  
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart);
