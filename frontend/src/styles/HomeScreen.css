@@ -40,7 +40,7 @@
   object-fit: cover;
   border-radius: 10px;
   aspect-ratio: 16/9;
-  /* transform: scale(0.80);   */
+  transform: scale(0.80);  
 }
 
 /* Product Grid Styling */
