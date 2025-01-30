@@ -12,7 +12,7 @@ const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false);
   const dispatch = useDispatch();
 
-  const { userInfo } = useSelector((state) => state.userLogin); // Get user details from Redux
+  const { userDetail } = useSelector((state) => state.userLogin); // Get user details
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
@@ -59,45 +59,20 @@ const OrderScreen = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Name: </strong> {userInfo?.name || "N/A"}
+                <strong>Name: </strong> {userDetail?.name || "N/A"}
               </p>
               <p>
-                <strong>Email: </strong> {userInfo?.email || "N/A"}
+                <strong>Email: </strong> {userDetail?.email || "N/A"}
               </p>
               <p>
                 <strong>Address: </strong>
-                {userInfo?.address?.street || "N/A"}, {userInfo?.address?.city || "N/A"},
-                {userInfo?.address?.postalcode || "N/A"}, {userInfo?.address?.country || "N/A"}
+                {userDetail?.address?.street || "N/A"}, {userDetail?.address?.city || "N/A"},
+                {userDetail?.address?.postalcode || "N/A"}, {userDetail?.address?.country || "N/A"}
               </p>
               {order.isDelivered ? (
                 <Message variant="success">Delivered on {order.deliveredAt}</Message>
               ) : (
                 <Message variant="danger">Not Delivered</Message>
-              )}
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h2>Order Items</h2>
-              {order.orderItems?.length === 0 ? (
-                <Message>Your cart is empty</Message>
-              ) : (
-                <ListGroup variant="flush">
-                  {order.orderItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
-                      <Row>
-                        <Col md={1}>
-                          <Image src={item.image} alt={item.name} fluid />
-                        </Col>
-                        <Col>
-                          <a href={`/product/${item.product}`}>{item.name}</a>
-                        </Col>
-                        <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
               )}
             </ListGroup.Item>
           </ListGroup>
