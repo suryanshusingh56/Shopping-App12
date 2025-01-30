@@ -40,7 +40,7 @@
   object-fit: cover;
   border-radius: 10px;
   aspect-ratio: 16/9;
-  transform: scale(0.50);  /* Correctly zoomed out effect */
+  transform: scale(0.80);  /* Correctly zoomed out effect */
 }
 
 /* Product Grid Styling */
