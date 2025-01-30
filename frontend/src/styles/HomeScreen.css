@@ -1,38 +1,38 @@
-/* Cart.css - Styles for Shopping Cart */
-.cart-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .cart-empty {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .cart-carousel img {
-    max-height: 300px;
-    object-fit: cover;
-  }
-  
-  .cart-item {
-    padding: 15px;
-  }
-  
-  .cart-image {
-    width: 100%;
-    height: 100px;
-    object-fit: contain;
-  }
-  
-  .cart-summary {
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-  }
-  
-  .btn-danger,
-  .btn-success {
-    font-size: 16px;
-  }
-  
+.home-carousel {
+  max-width: 800px;  
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.home-carousel-img {
+  width: 100%;
+  height: 300px; 
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Product Grid Styles */
+.product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+  height: 100%;
+}
+
+.product-container:hover {
+  transform: scale(1.05);
+}
+
+/* Product Image */
+.product-image {
+  width: 100%;
+  height: 220px; 
+  object-fit: cover;
+  border-radius: 10px;
+}
