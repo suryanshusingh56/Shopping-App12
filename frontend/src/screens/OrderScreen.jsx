@@ -46,23 +46,24 @@ const OrderScreen = () => {
     dispatch(payOrder({ orderId, paymentResult }));
   };
 
-  // Fallback in case order is still undefined
-  const shippingAddress = order?.shippingAddress || {};
-  const userName = userDetail?.name || "N/A"; // Fetch from `userLogin`
-  const userEmail = userDetail?.email || "N/A"; // Fetch from `userLogin`
-
-  // Calculate prices only if order exists and orderItems is not empty
+  // Ensure orderItems exists and calculate prices
   let itemsPrice = 0;
-  let shippingPrice = 0;
-  let taxPrice = 0;
+  let shippingPrice = order?.shippingPrice || 0;
+  let taxPrice = order?.taxPrice || 0;
   let totalPrice = 0;
 
   if (order?.orderItems && order?.orderItems.length > 0) {
-    itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0); // Correct calculation
-    shippingPrice = order.shippingPrice || 0; // Make sure shippingPrice exists
-    taxPrice = order.taxPrice || 0; // Make sure taxPrice exists
+    itemsPrice = order.orderItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    );
     totalPrice = itemsPrice + shippingPrice + taxPrice;
   }
+
+  // Fallback in case order is still undefined
+  const shippingAddress = order?.shippingAddress || {};
+  const userName = userDetail?.name || "N/A"; // Fetch from userLogin
+  const userEmail = userDetail?.email || "N/A"; // Fetch from userLogin
 
   return loading ? (
     <Loader />
@@ -112,7 +113,7 @@ const OrderScreen = () => {
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant="flush">
-                  {order.orderItems.map((item, index) => (
+                  {order?.orderItems?.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
@@ -142,7 +143,7 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${itemsPrice.toFixed(2)}</Col> {/* Items price */}
+                  <Col>${itemsPrice.toFixed(2)}</Col> {/* Display the calculated items price */}
                 </Row>
                 <Row>
                   <Col>Shipping</Col>
