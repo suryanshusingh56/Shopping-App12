@@ -1,5 +1,8 @@
+/* HomeScreen.css - Styling for Home Page */
+
+/* 🔹 Carousel Styling */
 .home-carousel {
-  max-width: 800px;  
+  max-width: 800px;  /* ✅ Controlled width */
   margin: auto;
   border-radius: 10px;
   overflow: hidden;
@@ -7,12 +10,13 @@
 
 .home-carousel-img {
   width: 100%;
-  height: 300px; 
-  object-fit: cover;
+  height: 250px;  /* ✅ Set fixed height */
+  object-fit: cover; /* ✅ Maintain aspect ratio while covering */
   border-radius: 10px;
+  aspect-ratio: 16/9; /* ✅ Forces images to have the same proportions */
 }
 
-/* Product Grid Styles */
+/* 🔹 Product Grid Styling */
 .product-container {
   display: flex;
   flex-direction: column;
@@ -29,10 +33,11 @@
   transform: scale(1.05);
 }
 
-/* Product Image */
+/* 🔹 Product Image */
 .product-image {
   width: 100%;
-  height: 220px; 
-  object-fit: cover;
+  height: 220px; /* ✅ Ensures all product images have same height */
+  object-fit: cover; /* ✅ Maintain aspect ratio */
   border-radius: 10px;
+  aspect-ratio: 16/9; /* ✅ Ensures all images are uniform */
 }

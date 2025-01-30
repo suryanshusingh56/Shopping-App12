@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../api/fetchProducts';
-import { Row, Col, Carousel, Image } from 'react-bootstrap';
+import { Row, Col, Carousel, Image, Card } from 'react-bootstrap';
 import ProductScreen from './ProductScreen';
 import Loader from '../components/shared/Loader';
 import Message from '../components/shared/Message';
-import '../styles/HomeScreen.css'; 
+import '../styles/HomeScreen.css'; // ✅ Import CSS
 
 function HomeScreen() {
   const dispatch = useDispatch();
@@ -18,12 +18,12 @@ function HomeScreen() {
 
   return (
     <>
-      {/* Carousel at the top displaying all product images */}
+      {/* Carousel with Uniform Images */}
       {products.length > 0 && (
         <Carousel className="home-carousel mb-4">
           {products.map((product) => (
             <Carousel.Item key={product._id}>
-              <Image className="d-block w-100 home-carousel-img" src={product.image} alt={product.name} fluid />
+              <Image className="d-block w-100 home-carousel-img" src={product.image} alt={product.name} />
               <Carousel.Caption>
                 <h5>{product.name}</h5>
               </Carousel.Caption>
@@ -32,7 +32,7 @@ function HomeScreen() {
         </Carousel>
       )}
 
-      {/* Product List */}
+      {/* Product Grid with Uniform Images */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -41,7 +41,10 @@ function HomeScreen() {
         <Row>
           {products.map((product) => (
             <Col key={product._id} md={3} className="mb-4">
-              <ProductScreen product={product} />
+              <Card className="product-container">
+                <Image src={product.image} alt={product.name} className="product-image" />
+                <ProductScreen product={product} />
+              </Card>
             </Col>
           ))}
         </Row>
