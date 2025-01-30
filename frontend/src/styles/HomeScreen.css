@@ -36,11 +36,11 @@
 
 .home-carousel-img {
   width: 100%;
-  height: 300px;  /* Set fixed height */
+  height: 400px;  /* Set fixed height */
   object-fit: cover;
   border-radius: 10px;
   aspect-ratio: 16/9;
-  transform: scale(0.85);  /* Correctly zoomed out effect */
+  transform: scale(0.50);  /* Correctly zoomed out effect */
 }
 
 /* Product Grid Styling */
