@@ -18,7 +18,13 @@ function HomeScreen() {
 
   return (
     <>
-      {/* Carousel with Uniform Images */}
+      {/* 🔹 Top Section with Vibrant Colors */}
+      <div className="home-top-section">
+        <h1>Welcome to Our Store</h1>
+        <p>Find the best products at unbeatable prices!</p>
+      </div>
+
+      {/* 🔹 Carousel with Uniform Images */}
       {products.length > 0 && (
         <Carousel className="home-carousel mb-4">
           {products.map((product) => (
@@ -32,7 +38,7 @@ function HomeScreen() {
         </Carousel>
       )}
 
-      {/* Product Grid with Uniform Images */}
+      {/* 🔹 Product Grid with Uniform Images */}
       {loading ? (
         <Loader />
       ) : error ? (
