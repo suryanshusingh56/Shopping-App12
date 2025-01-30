@@ -17,7 +17,7 @@ function HomeScreen() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="home-page-background"> {/* ✅ Apply Background Only Here */}
       {/* 🔹 Welcome Section */}
       <div className="home-top-section">
         <h1>Welcome to Our Store</h1>
@@ -38,7 +38,7 @@ function HomeScreen() {
         </Carousel>
       )}
 
-      {/* 🔹 Product Grid (Fixed Duplicate Images) */}
+      {/* 🔹 Product Grid (No Duplicates, Single Image Per Product) */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -49,7 +49,7 @@ function HomeScreen() {
             <Col key={product._id} md={3} className="mb-4">
               <Card className="product-container">
                 {/* ✅ Display Only One Image in Grid */}
-                <Image src={product.image} alt={product.name} className="product-image" />
+                {/* <Image src={product.image} alt={product.name} className="product-image" /> */}
                 <div className="product-info">
                   <h5>{product.name}</h5>
                   <ProductScreen product={product} /> {/* ✅ Keep the logic intact */}
@@ -59,7 +59,7 @@ function HomeScreen() {
           ))}
         </Row>
       )}
-    </>
+    </div>
   );
 }
 
