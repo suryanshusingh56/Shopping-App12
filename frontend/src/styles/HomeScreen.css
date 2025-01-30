@@ -40,6 +40,7 @@
   object-fit: cover;
   border-radius: 10px;
   aspect-ratio: 16/9;
+  /* transform: scale(0.80);   */
 }
 
 /* Product Grid Styling */
@@ -48,7 +49,6 @@
   margin: auto;
 }
 
-/* Product Container with fixed height */
 .product-container {
   display: flex;
   flex-direction: column;
@@ -58,42 +58,26 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   transition: transform 0.2s ease-in-out;
+  height: 100%;
   background: white;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-  height: 420px; /* Fixed height for consistency */
-  overflow: hidden; /* Prevent overflow of content */
+  /* Set a fixed height for uniform grid size */
+  height: 380px;
 }
 
-/* Hover effect for product card */
 .product-container:hover {
   transform: scale(1.05);
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Product Image Styling */
+/* Product Image (No Duplicates) */
 .product-image {
   width: 100%;
-  height: 250px; /* Fixed height for the image */
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-/* Ensure product name fits within space */
-.product-name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 1.5;  /* Prevent the text from getting too tight */
-  height: 60px;  /* Fixed height for name */
-  overflow: hidden;
-}
-
-/* Description Styling */
-.product-description {
-  font-size: 1rem;
-  color: #555;
-  height: 60px; /* Fixed height for description */
-  overflow: hidden; /* Handle overflow text */
+  aspect-ratio: 16/9;
+  margin-bottom: 15px; /* Add some space below the image */
 }
 
 /* Navbar Styling */

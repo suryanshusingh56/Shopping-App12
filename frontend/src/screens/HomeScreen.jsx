@@ -47,10 +47,8 @@ function HomeScreen() {
           {products.map((product) => (
             <Col key={product._id} md={3} className="mb-4">
               <Card className="product-container">
-                <Image src={product.image} alt={product.name} className="product-image" />
                 <div className="product-info">
-                  <h5 className="product-name">{product.name}</h5>
-                  <p className="product-description">{product.description}</p>
+                  <h5>{product.name}</h5>
                   <ProductScreen product={product} /> {/* ✅ Keep the logic intact */}
                 </div>
               </Card>
