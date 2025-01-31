@@ -119,7 +119,7 @@
 
 .product-image {
   width: 100%;
-  height: 400px; /* Increased height for larger images */
+  height: 250px; /* Increased height for larger images */
   object-fit: cover; /* Maintain aspect ratio */
   transition: transform 0.3s ease;
 }
@@ -132,8 +132,8 @@
   padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space between content and button */
-  flex: 1; /* Allow the info section to take up remaining space */
+  /* justify-content: space-between; Space between content and button */
+  flex: 1; 
 }
 
 .product-name {
