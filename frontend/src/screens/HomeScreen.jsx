@@ -7,6 +7,7 @@ import NavigationBar from './NavigationBar'; // Import the updated NavigationBar
 import Loader from '../components/shared/Loader';
 import Message from '../components/shared/Message';
 import '../styles/HomeScreen.css'; // Import CSS
+import '../components/NavigationBar';
 
 function HomeScreen() {
   const dispatch = useDispatch();
