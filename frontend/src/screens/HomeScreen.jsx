@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../api/fetchProducts';
 import { Row, Col, Carousel, Image, Card, Button } from 'react-bootstrap';
-import ProductScreen from './ProductScreen';
+import NavigationBar from './NavigationBar'; // Import the updated NavigationBar
 import Loader from '../components/shared/Loader';
 import Message from '../components/shared/Message';
 import '../styles/HomeScreen.css'; // Import CSS
 
 function HomeScreen() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const productList = useSelector(state => state.productList);
   const { loading, error, products } = productList;
 
@@ -18,23 +18,25 @@ function HomeScreen() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // Function to handle navigation to product details
   const handleViewDetails = (productId) => {
-    navigate(`/product/${productId}`); // Navigate to the product details page
+    navigate(`/product/${productId}`);
   };
 
   return (
     <div className="home-page-background">
+      {/* 🔹 Navigation Bar */}
+      <NavigationBar />
+
       {/* 🔹 Welcome Section */}
       <div className="home-top-section text-center py-5">
         <h1 className="display-4 font-weight-bold">Welcome to Our Store</h1>
         <p className="lead">Find the best products at unbeatable prices!</p>
       </div>
 
-      {/* 🔹 Carousel (Full Width as Welcome Section) */}
+      {/* 🔹 Carousel */}
       {products.length > 0 && (
         <Carousel className="home-carousel mb-5" fade>
-          {products.slice(0, 5).map((product) => ( // Show only the first 5 products in the carousel
+          {products.slice(0, 5).map((product) => (
             <Carousel.Item key={product._id}>
               <Image
                 className="d-block w-100 home-carousel-img"
@@ -47,7 +49,7 @@ function HomeScreen() {
                 <Button
                   variant="light"
                   className="carousel-shop-now-btn"
-                  onClick={() => handleViewDetails(product._id)} // Navigate on click
+                  onClick={() => handleViewDetails(product._id)}
                 >
                   Shop Now
                 </Button>
@@ -80,7 +82,7 @@ function HomeScreen() {
                   <Button
                     variant="primary"
                     className="product-view-btn"
-                    onClick={() => handleViewDetails(product._id)} // Navigate on click
+                    onClick={() => handleViewDetails(product._id)}
                   >
                     View Details
                   </Button>
