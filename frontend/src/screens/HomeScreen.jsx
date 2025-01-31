@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { fetchProducts } from '../api/fetchProducts';
 import { Row, Col, Carousel, Image, Card, Button } from 'react-bootstrap';
 import ProductScreen from './ProductScreen';
@@ -9,12 +10,18 @@ import '../styles/HomeScreen.css'; // Import CSS
 
 function HomeScreen() {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize useNavigate
   const productList = useSelector(state => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  // Function to handle navigation to product details
+  const handleViewDetails = (productId) => {
+    navigate(`/product/${productId}`); // Navigate to the product details page
+  };
 
   return (
     <div className="home-page-background">
@@ -37,7 +44,11 @@ function HomeScreen() {
               <Carousel.Caption className="carousel-caption-overlay">
                 <h3 className="carousel-title">{product.name}</h3>
                 <p className="carousel-description">{product.description}</p>
-                <Button variant="light" className="carousel-shop-now-btn">
+                <Button
+                  variant="light"
+                  className="carousel-shop-now-btn"
+                  onClick={() => handleViewDetails(product._id)} // Navigate on click
+                >
                   Shop Now
                 </Button>
               </Carousel.Caption>
@@ -66,7 +77,11 @@ function HomeScreen() {
                 <Card.Body className="product-info text-center">
                   <h5 className="product-name">{product.name}</h5>
                   <p className="product-price">${product.price}</p>
-                  <Button variant="primary" className="product-view-btn">
+                  <Button
+                    variant="primary"
+                    className="product-view-btn"
+                    onClick={() => handleViewDetails(product._id)} // Navigate on click
+                  >
                     View Details
                   </Button>
                 </Card.Body>
