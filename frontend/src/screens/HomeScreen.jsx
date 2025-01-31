@@ -25,10 +25,7 @@ function HomeScreen() {
 
   return (
     <div className="home-page-background">
-      {/* 🔹 Navigation Bar */}
-      <Header /> {/* Use the updated Header component */}
-
-      {/* 🔹 Welcome Section */}
+      {/* <Header /> Use the updated Header component */}
       <div className="home-top-section text-center py-5">
         <h1 className="display-4 font-weight-bold">Welcome to Our Store</h1>
         <p className="lead">Find the best products at unbeatable prices!</p>
