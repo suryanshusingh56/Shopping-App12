@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../api/fetchProducts';
 import { Row, Col, Carousel, Image, Card, Button } from 'react-bootstrap';
-import NavigationBar from './NavigationBar'; // Import the updated NavigationBar
+import Header from '../components/Header';
 import Loader from '../components/shared/Loader';
 import Message from '../components/shared/Message';
 import '../styles/HomeScreen.css'; // Import CSS
-import '../components/NavigationBar';
+
 
 function HomeScreen() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function HomeScreen() {
   return (
     <div className="home-page-background">
       {/* 🔹 Navigation Bar */}
-      <NavigationBar />
+      <Header /> {/* Use the updated Header component */}
 
       {/* 🔹 Welcome Section */}
       <div className="home-top-section text-center py-5">

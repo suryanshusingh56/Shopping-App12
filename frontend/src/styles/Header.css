@@ -1,0 +1,50 @@
+/* Header Styles */
+.navbar {
+    background: #ffffff; /* White background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px 20px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2575fc; /* Accent color for the brand */
+  }
+  
+  .navbar-brand .brand-text {
+    color: #2575fc; /* Ensure brand text uses the accent color */
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    color: #333333; /* Dark text color */
+    margin: 0 10px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background: #2575fc; /* Accent color on hover */
+    color: #ffffff; /* White text on hover */
+  }
+  
+  .nav-dropdown .dropdown-item {
+    font-size: 0.9rem;
+    color: #333333; /* Dark text color */
+    padding: 8px 16px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-dropdown .dropdown-item:hover {
+    background: #2575fc; /* Accent color on hover */
+    color: #ffffff; /* White text on hover */
+  }
+  
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(37, 117, 252, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
