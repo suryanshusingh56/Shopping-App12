@@ -132,8 +132,8 @@
   padding: 15px;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; Space between content and button */
-  /* flex: 1;  */
+  justify-content: space-between; 
+  flex: 1; 
 }
 
 .product-name {
