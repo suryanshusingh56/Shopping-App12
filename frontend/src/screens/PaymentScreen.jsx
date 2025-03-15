@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../reducers/cartReducer";
 import CheckoutStep from "../components/shared/CheckoutStep";
 
@@ -16,14 +16,16 @@ const PaymentScreen = () => {
 
   useEffect(() => {
     if (!shippingAddress?.address) {
-      navigate("/shipping"); 
+      navigate("/shipping");
     }
   }, [shippingAddress, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeorder"); 
+    dispatch(savePaymentMethod(paymentMethod)); 
+    setTimeout(() => {
+      navigate("/placeorder");
+    }, 0);
   };
 
   return (
@@ -42,16 +44,16 @@ const PaymentScreen = () => {
               value="Paypal or Credit Card"
               checked={paymentMethod === "Paypal or Credit Card"}
               onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
+            />
             <Form.Check
               type="radio"
               label="Cash On Delivery"
               id="cod"
               name="paymentMethod"
               value="Cash On Delivery"
-              checked={paymentMethod === "Cash On Delivery"} 
+              checked={paymentMethod === "Cash On Delivery"}
               onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
+            />
           </Col>
         </Form.Group>
         <Button type="submit" variant="primary">

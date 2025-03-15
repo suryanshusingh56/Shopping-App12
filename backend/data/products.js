@@ -253,18 +253,6 @@ const products = [
       numReviews: 27,
     },
     {
-      name: 'Dyson V15 Detect Vacuum Cleaner',
-      image: '/images/dysonvacuum.jpg',
-      description:
-        'Advanced cordless vacuum cleaner with laser dust detection and powerful suction.',
-      brand: 'Dyson',
-      category: 'Home Appliances',
-      price: 699.99,
-      countInStock: 8,
-      rating: 4.9,
-      numReviews: 30,
-    },
-    {
       name: 'Sony PlayStation 5',
       image: '/images/ps5.jpg',
       description:
